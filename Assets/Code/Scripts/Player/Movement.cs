@@ -11,7 +11,7 @@ namespace Player.Controller
         [SerializeField] private float _speed = 10;
         [SerializeField] private float _accelRate = 25;
 
-        [Header("Camera")]
+        [Header("Camera Offset")]
         [SerializeField] private CinemachinePositionComposer _camera;
         [SerializeField, Range(0, 10)] private float _offset = 2;
 

@@ -14,7 +14,7 @@ public class CarbonProyectil : MonoBehaviour
     private float vidaRestante;
     private Vector2 direccion = Vector2.right;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         vidaRestante = vidaMax;
@@ -27,7 +27,7 @@ public class CarbonProyectil : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angulo, Vector3.forward);
     }
 
-    void Update()
+    private void Update()
     {
         vidaRestante -= Time.deltaTime;
         if (vidaRestante <= 0f)
@@ -36,7 +36,7 @@ public class CarbonProyectil : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Nino"))
         {
@@ -58,14 +58,13 @@ public class CarbonProyectil : MonoBehaviour
         }
     }
 
-    void DestruirProyectil()
+    private void DestruirProyectil()
     {
         var ps = GetComponentInChildren<ParticleSystem>();
         if (ps != null)
         {
-            ps.transform.parent = null;  
-            ps.Stop();                   
-            Destroy(ps.gameObject, 1f);  
+            ps.transform.parent = null;
+            ps.Stop();
         }
 
         Destroy(gameObject);

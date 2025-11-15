@@ -16,10 +16,7 @@ namespace Player.Controller
         }
 
         public Vector2 GetDirection => new(transform.localScale.x, 0f);
-        public void SetDirection(int value)
-        {
-            transform.localScale = new(value, 1f, 1f);
-        }
+        public void SetDirection(int value) => transform.localScale = new(value, 1f, 1f);
 
         public void AddForceX(float force, ForceMode2D mode) => Body.AddForceX(force, mode);
         public void AddForceY(float force, ForceMode2D mode) => Body.AddForceY(force, mode);

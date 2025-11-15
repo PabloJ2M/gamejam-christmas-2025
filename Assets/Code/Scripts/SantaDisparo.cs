@@ -1,38 +1,35 @@
+using Player.Controller;
 using UnityEngine;
 
 public class SantaDisparo : MonoBehaviour
 {
     [Header("Disparo")]
+    
     [SerializeField] private CarbonProyectil prefabProyectil;
     [SerializeField] private Transform puntoDisparo;
     [SerializeField] private float tiempoEntreDisparos = 0.25f;
 
+    private Core player;
     private float cooldown;
 
-    void Update()
+    private void Awake() => player = GetComponent<Core>();
+    private void Update() => cooldown -= Time.deltaTime;
+
+    private void OnAttack()
     {
-        cooldown -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.J) && cooldown <= 0f)
-        {
-            Disparar();
-        }
+        if (cooldown > 0f) return;
+        Disparar();
     }
-
-    void Disparar()
+    private void Disparar()
     {
         cooldown = tiempoEntreDisparos;
-
-        float dirX = Mathf.Sign(transform.localScale.x);
-        Vector2 direccion = dirX > 0 ? Vector2.right : Vector2.left;
 
         CarbonProyectil nuevo = Instantiate(
             prefabProyectil,
             puntoDisparo.position,
-            Quaternion.identity
+            default
         );
 
-        nuevo.Inicializar(direccion);
-
+        nuevo.Inicializar(player.GetDirection);
     }
 }
