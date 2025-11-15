@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 89d34d864e656f449866cc76672ca218
+guid: 1b2b547cfa5c3e74c9d555ffc0088e68
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8054967571322352605
-    second: MisilonSanta_0
+      213: 3617781652876852787
+    second: WarningSign_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 850
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MisilonSanta_0
+      name: WarningSign_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
-        width: 725
-        height: 749
+        x: 0
+        y: 0
+        width: 620
+        height: 980
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32c4a02cba1073090800000000000000
-      internalID: -8054967571322352605
+      spriteID: 33e76a6de31f43230800000000000000
+      internalID: 3617781652876852787
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MisilonSanta_0: -8054967571322352605
+      WarningSign_0: 3617781652876852787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

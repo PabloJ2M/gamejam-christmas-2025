@@ -16,26 +16,71 @@ namespace Player.Controller
         [SerializeField, Range(0, 10)] private float _offset = 2;
 
         private Core _player;
+        PlayerStun _stun;
         private int _input;
 
-        private void Awake() => _player = GetComponent<Core>();
+        private void Awake() 
+        { 
+            _player = GetComponent<Core>(); 
+            _stun = GetComponent<PlayerStun>();
+
+            if (_stun != null)
+                _stun.OnStunFinished += RecuperarControl;
+        }
         private void FixedUpdate()
         {
+            if (_stun != null && _stun.IsStunned)
+            {
+                var vel = _player.Body.linearVelocity;
+                vel.x = 0f;
+                _player.Body.linearVelocity = vel;
+                _player.Animator.SetInteger("Speed", 0);
+
+                if (_camera != null)
+                    _camera.TargetOffset.x = 0f;
+
+                return;
+            }
+
             float targetSpeed = _input * _speed;
             float speedDif = targetSpeed - _player.Body.linearVelocityX;
             float movement = speedDif * _accelRate;
 
-            if (movement != 0) _player.AddForceX(movement, ForceMode2D.Force);
-            if (_input != 0) _player.SetDirection(_input);
+            if (movement != 0)
+                _player.AddForceX(movement, ForceMode2D.Force);
+
+            if (_input != 0)
+                _player.SetDirection(_input);
         }
 
         private void OnMove(InputValue value)
         {
-            float input = value.Get<Vector2>().x;
+            if (_stun != null && _stun.IsStunned)
+            {
+                _input = 0;
+                _player.Animator.SetInteger("Speed", 0);
 
+                if (_camera != null)
+                    _camera.TargetOffset.x = 0f;
+
+                return;
+            }
+
+            float input = value.Get<Vector2>().x;
             _input = Mathf.RoundToInt(input);
+
             _player.Animator.SetInteger("Speed", _input);
-            _camera.TargetOffset.x = _input * _offset;
+
+            if (_camera != null)
+                _camera.TargetOffset.x = _input * _offset;
+        }
+
+        private void RecuperarControl()
+        {
+            _input = 0; 
+            _player.Animator.SetInteger("Speed", 0);
+            if (_camera != null)
+                _camera.TargetOffset.x = 0f;
         }
     }
 }
