@@ -10,12 +10,14 @@ public class DamageArea : MonoBehaviour
         _player = GetComponentInParent<Core>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IRecibeGolpe kid))
+        if (collision.TryGetComponent(out NinoBase kid))
         {
             kid.RecibirGolpe(_player.GetDirection);
-            collision.attachedRigidbody?.AddForce(_player.GetDirection + Vector2.up);
+            kid.TakeDamage(1);
+            collision.attachedRigidbody?.AddForce(_player.GetDirection + Vector2.up * 25);
+            print("aplicar daño");
         }
     }
 }

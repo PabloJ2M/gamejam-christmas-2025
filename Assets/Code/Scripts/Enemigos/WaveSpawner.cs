@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
@@ -17,6 +18,9 @@ public class WaveSpawner : MonoBehaviour
     [Header("Intervalos")]
     [SerializeField] float intervaloMordedor = 1f;
     [SerializeField] float intervaloPetardos = 3f;
+
+    [SerializeField] private UnityEvent _bossFightCallback;
+    public bool CompleteBoss { private get; set; }
 
     [Serializable]
     struct Wave
@@ -65,6 +69,13 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitUntil(() => NinoBase.AliveCount == 0);
 
             yield return new WaitForSeconds(2f);
+
+            if (i + 1 % 3 == 0)
+            {
+                _bossFightCallback.Invoke();
+                yield return new WaitUntil(() => CompleteBoss);
+                CompleteBoss = false;
+            }
         }
 
     }

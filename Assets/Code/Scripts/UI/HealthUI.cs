@@ -29,4 +29,3 @@ public class HealthUI : MonoBehaviour
         barraVida.fillAmount = currentFill;
     }
 }
-

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1105126647995178742}
   - component: {fileID: 3847867926458626676}
   - component: {fileID: 4418348271360146597}
-  - component: {fileID: 8033246873093386289}
   m_Layer: 8
   m_Name: "Ni\xF1oPobre"
   m_TagString: Nino
@@ -161,25 +160,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   radioMordida: 0.7
---- !u!114 &8033246873093386289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7422251817531006156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a51c52b1432bb4988818a84b446362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 1
-  fuerzaGolpe: 20
-  torqueMuerte: 8
-  tiempoDesaparecer: 1.5
-  rb: {fileID: 1105126647995178742}
-  anim: {fileID: 0}
-  muerto: 0
 --- !u!1 &7692512305170100207
 GameObject:
   m_ObjectHideFlags: 0

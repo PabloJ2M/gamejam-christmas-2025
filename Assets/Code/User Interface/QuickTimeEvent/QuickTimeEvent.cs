@@ -13,6 +13,7 @@ namespace UnityEngine.InputSystem
         [SerializeField, Range(0f, 0.5f)] private float _tickRate;
 
         [SerializeField] private UnityEvent<bool> _onCompleteEvent;
+        [SerializeField] private UnityEvent _onGoodResult, _onBadResult; 
 
         private ProgressBar _progress;
         private float _fillTarget, _pressIndex;
@@ -35,9 +36,9 @@ namespace UnityEngine.InputSystem
             if (value == 0 || _pressIndex == value) return;
 
             _pressIndex = value;
-            _fillTarget += _hitPerTick;
+            _fillTarget = Mathf.Clamp01(_fillTarget + _hitPerTick);
         }
-        private void OnPullBack() => _fillTarget -= _hitPerTick;
+        private void OnPullBack() => _fillTarget = Mathf.Clamp01(_fillTarget - _hitPerTick);
 
         private void OnEventStarted()
         {
@@ -49,6 +50,9 @@ namespace UnityEngine.InputSystem
         private void OnEventCompleted()
         {
             _onCompleteEvent?.Invoke(_progress.FillAmount > 0.5f);
+            if (_progress.FillAmount > 0.5f) _onGoodResult.Invoke();
+            else _onBadResult.Invoke();
+            
             _inputs.action.Disable();
             _isPlaying = false;
             CancelInvoke();

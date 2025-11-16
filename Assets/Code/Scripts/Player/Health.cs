@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Health : MonoBehaviour, IDamageable
 {
@@ -6,8 +7,9 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] int vidaMax = 3;
     int vidaActual;
 
-    [SerializeField] DeathScreenUI deathUI;
-
+    [SerializeField] TweenGroup deathUI;
+    [SerializeField] private Pause _pause;
+    
     [Header("Invulnerabilidad")]
     [SerializeField] float duracionInvulnerabilidad = 0.7f;
     bool invulnerable;
@@ -45,14 +47,21 @@ public class Health : MonoBehaviour, IDamageable
 
         if (vidaActual <= 0)
         {
-            if (deathUI == null)
-            {
-                deathUI = FindFirstObjectByType<DeathScreenUI>();
-            }
+            //if (deathUI == null)
+            //{
+            //    deathUI = FindFirstObjectByType<DeathScreenUI>();
+            //}
 
-            if (deathUI != null)
-                deathUI.MostrarPantallaMuerte();
+            //if (deathUI != null)
+            //    deathUI.MostrarPantallaMuerte();
+            deathUI.EnableTween();
+            _pause.enabled = false;
+            Time.timeScale = 0;
         }
+    }
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
     }
 
     public void Heal(int amount)
