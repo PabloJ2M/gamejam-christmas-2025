@@ -7,7 +7,7 @@ namespace UnityEngine.Animations
         [SerializeField] protected Direction _direction;
         [SerializeField] protected Vector2 _overrideDistance;
 
-        protected virtual void Start()
+        protected override void OnStart()
         {
             Vector3 size = _transform.rect.size;
             Vector3 direction = _direction.Get();
@@ -17,21 +17,19 @@ namespace UnityEngine.Animations
             _from = _to = _transform.localPosition;
             _to += new Vector3(direction.x * size.x, direction.y * size.y, 0f);
         }
+        protected override void OnComplete() { }
 
         protected override void OnPerformePlay(bool value)
         {
             if (_tweenCore.IsEnabled == value) return;
 
             //create tween animation
-            Tween tween = Tween.LocalPosition(_self.transform, value ? _from : _to, _tweenCore.Time,
+            Tween tween = Tween.LocalPosition(_transform, value ? _from : _to, _tweenCore.Time,
                 _animationCurve,
                 _tweenCore.IsLoop ? -1 : 1, CycleMode.Yoyo,
                 _tweenCore.Delay, 0, _tweenCore.IgnoreTimeScale);
 
             tween.OnComplete(OnComplete);
-            //tween.setOnUpdateVector3(OnUpdate);
         }
-
-        protected override void OnComplete() { }
     }
 }

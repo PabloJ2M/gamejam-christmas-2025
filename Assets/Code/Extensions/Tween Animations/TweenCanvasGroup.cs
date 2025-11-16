@@ -4,7 +4,6 @@ namespace UnityEngine.Animations
     public class TweenCanvasGroup : TweenAlpha
     {
         [SerializeField] private bool _modifyInteraction;
-
         private CanvasGroup _canvasGroup;
 
         protected override void Awake()
@@ -12,17 +11,12 @@ namespace UnityEngine.Animations
             base.Awake();
             _canvasGroup = GetComponent<CanvasGroup>();
         }
-        private void Start()
+
+        protected override void OnStart()
         {
             _alpha = _canvasGroup.alpha = _tweenCore.IsEnabled ? 1f : 0f;
             PerformceInteraction(_tweenCore.IsEnabled);
         }
-        private void PerformceInteraction(bool value)
-        {
-            if (_modifyInteraction)
-                _canvasGroup.interactable = _canvasGroup.blocksRaycasts = value;
-        }
-        
         protected override void OnUpdate(float value) { base.OnUpdate(value); _canvasGroup.alpha = value; }
         protected override void OnPerformePlay(bool value)
         {
@@ -34,6 +28,12 @@ namespace UnityEngine.Animations
         {
             base.OnComplete();
             _canvasGroup.alpha = _alpha;
+        }
+
+        private void PerformceInteraction(bool value)
+        {
+            if (_modifyInteraction)
+                _canvasGroup.interactable = _canvasGroup.blocksRaycasts = value;
         }
     }
 }

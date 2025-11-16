@@ -25,14 +25,16 @@ namespace UnityEngine.Animations
 
         public bool IsEnabled { get; set; }
 
-        private void Awake() => IsEnabled = !_startDisable;
-        private void OnEnable() => _group?.AddListener(this);
+        //private void Awake() => IsEnabled = !_startDisable;
         private void OnDisable() => _group?.RemoveListener(this);
-        [ContextMenu("Swap Animation")] public void SwapTweenAnimation() => Play(!IsEnabled);
 
-        private async void Start()
+        private async void OnEnable()
         {
+            IsEnabled = !_startDisable;
+            _group?.AddListener(this);
+
             await Task.Yield();
+
             if (_playOnAwake) Play(!IsEnabled);
         }
         public void Play(bool value)
@@ -41,5 +43,7 @@ namespace UnityEngine.Animations
             onPlayStatusChanged?.Invoke(value);
             IsEnabled = value;
         }
+
+        [ContextMenu("Swap Animation")] public void SwapTweenAnimation() => Play(!IsEnabled);
     }
 }

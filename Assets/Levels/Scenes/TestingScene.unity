@@ -317,7 +317,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.24429
+  m_FillAmount: 0.60746396
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.479
+  m_FillAmount: 0.649
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2069,7 +2069,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2924,9 +2924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentMask: {fileID: 352089812}
-  _threshold: 0.479
+  _threshold: 0.649
   _fillAmount: {fileID: 119518512}
-  _value: 0.51
+  _value: 0.936
 --- !u!114 &2142373154
 MonoBehaviour:
   m_ObjectHideFlags: 0
