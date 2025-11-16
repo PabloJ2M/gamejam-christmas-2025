@@ -3,6 +3,7 @@ namespace UnityEngine.Animations
     [RequireComponent(typeof(CanvasGroup))]
     public class TweenCanvasGroup : TweenAlpha
     {
+        [SerializeField] private bool _disableOnHide;
         [SerializeField] private bool _modifyInteraction;
         private CanvasGroup _canvasGroup;
 
@@ -17,17 +18,23 @@ namespace UnityEngine.Animations
             _alpha = _canvasGroup.alpha = _tweenCore.IsEnabled ? 1f : 0f;
             PerformceInteraction(_tweenCore.IsEnabled);
         }
-        protected override void OnUpdate(float value) { base.OnUpdate(value); _canvasGroup.alpha = value; }
-        protected override void OnPerformePlay(bool value)
+        protected override void OnUpdate(float value)
         {
-            base.OnPerformePlay(value);
-            if (_tweenCore.IsEnabled != value)
-                PerformceInteraction(value);
+            base.OnUpdate(value);
+            _canvasGroup.alpha = value;
         }
         protected override void OnComplete()
         {
             base.OnComplete();
             _canvasGroup.alpha = _alpha;
+            _tweenCore.onComplete?.Invoke();
+            if (_disableOnHide && _alpha == 0) gameObject.SetActive(false);
+        }
+        protected override void OnPerformePlay(bool value)
+        {
+            base.OnPerformePlay(value);
+            if (_tweenCore.IsEnabled != value)
+                PerformceInteraction(value);
         }
 
         private void PerformceInteraction(bool value)

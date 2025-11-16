@@ -15,12 +15,7 @@ namespace UnityEngine.Animations
         {
             if (_tweenCore.IsEnabled == value) return;
 
-            //create tween animation
-            Tween tween = Tween.Custom(_alpha, value ? 1f : 0f, _tweenCore.Time, OnUpdate,
-                _animationCurve,
-                _tweenCore.IsLoop ? -1 : 1, CycleMode.Yoyo,
-                _tweenCore.Delay, 0, _tweenCore.IgnoreTimeScale);
-
+            Tween tween = Tween.Custom(_alpha, value ? 1f : 0f, _settings, OnUpdate);
             tween.OnComplete(OnComplete);
         }
     }
