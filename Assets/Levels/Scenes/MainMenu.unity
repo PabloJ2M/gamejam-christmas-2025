@@ -215,6 +215,10 @@ PrefabInstance:
       value: 0.015005771
       objectReference: {fileID: 0}
     - target: {fileID: 821805810267580388, guid: f10a33b22f1a6734581f49fa72978b99, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.6323
+      objectReference: {fileID: 0}
+    - target: {fileID: 821805810267580388, guid: f10a33b22f1a6734581f49fa72978b99, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.465534
       objectReference: {fileID: 0}
@@ -496,6 +500,14 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8685353289516861483, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8685353289516861483, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 227344441
+      objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
       propertyPath: m_Name
       value: Fondo
@@ -564,9 +576,25 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -2899303487238711350, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2899303487238711350, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 227344441
+      objectReference: {fileID: 0}
     - target: {fileID: -2352419299675522491, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242205908087845341, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242205908087845341, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 227344441
       objectReference: {fileID: 0}
     - target: {fileID: 4545656766144999136, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
       propertyPath: m_Size.x
@@ -575,6 +603,14 @@ PrefabInstance:
     - target: {fileID: 4545656766144999136, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
       propertyPath: m_DrawMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545656766144999136, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545656766144999136, guid: f9a8d9913c35dd347932fd896bf70381, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 227344441
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
