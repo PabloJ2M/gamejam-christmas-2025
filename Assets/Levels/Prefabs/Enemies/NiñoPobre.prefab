@@ -188,12 +188,16 @@ MonoBehaviour:
   capaProyectiles:
     serializedVersion: 2
     m_Bits: 64
-  radioDeteccionProyectil: 2.8
+  radioDeteccionProyectil: 2
   fuerzaSalto: 12
-  probabilidadEsquivar: 0.4
+  probabilidadEsquivar: 0.2
   danoMordida: 1
   fuerzaEmpujeSanta: 15
   tiempoEntreMordidas: 0.7
+  capaSanta:
+    serializedVersion: 2
+    m_Bits: 8
+  radioMordida: 0.7
 --- !u!114 &8033246873093386289
 MonoBehaviour:
   m_ObjectHideFlags: 0

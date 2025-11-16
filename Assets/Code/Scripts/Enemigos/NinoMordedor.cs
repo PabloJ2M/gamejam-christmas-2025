@@ -17,10 +17,12 @@ public class NinoMordedor : NinoBase
     [SerializeField] int danoMordida = 1;
     [SerializeField] float fuerzaEmpujeSanta = 8f;
     [SerializeField] float tiempoEntreMordidas = 0.7f;
+    [SerializeField] LayerMask capaSanta;
+    [SerializeField] float radioMordida = 0.7f;
 
     Transform santa;
     float ultimoTiempoMordida;
-    int direccion = 1;   
+    int direccion = 1;
 
     protected override void Awake()
     {
@@ -58,6 +60,7 @@ public class NinoMordedor : NinoBase
         if (anim) anim.SetFloat("Speed", Mathf.Abs(vel.x));
 
         DetectarYEsquivarProyectil();
+        DetectarMordida();
     }
 
     void DetectarYEsquivarProyectil()
@@ -80,18 +83,20 @@ public class NinoMordedor : NinoBase
         if (anim) anim.SetTrigger("Jump");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void DetectarMordida()
     {
-        if (muerto) return;
         if (Time.time - ultimoTiempoMordida < tiempoEntreMordidas) return;
 
-        Health health = collision.collider.GetComponent<Health>();
+        Collider2D col = Physics2D.OverlapCircle(transform.position, radioMordida, capaSanta);
+        if (!col) return;
+
+        Health health = col.GetComponent<Health>();
         if (health == null || health.IsDead || health.IsInvulnerable) return;
 
         health.TakeDamage(danoMordida);
         ultimoTiempoMordida = Time.time;
 
-        Rigidbody2D rbPlayer = collision.collider.attachedRigidbody;
+        Rigidbody2D rbPlayer = col.attachedRigidbody;
         if (rbPlayer != null)
         {
             Vector2 dirEmpuje = (rbPlayer.position - rb.position).normalized;
@@ -106,7 +111,11 @@ public class NinoMordedor : NinoBase
     {
         Gizmos.color = Color.red;
 
-        Vector2 centro = (Vector2)transform.position + Vector2.right * direccion * radioDeteccionProyectil;
-        Gizmos.DrawWireSphere(centro, radioDeteccionProyectil);
+        Vector2 centroEsquive = (Vector2)transform.position + Vector2.right * direccion * radioDeteccionProyectil;
+        Gizmos.DrawWireSphere(centroEsquive, radioDeteccionProyectil);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radioMordida);
     }
 }
+
