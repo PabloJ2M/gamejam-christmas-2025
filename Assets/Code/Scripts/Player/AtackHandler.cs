@@ -23,7 +23,7 @@ public class AtackHandler : MonoBehaviour
 
     internal void OnAttack()
     {
-        if (_shootCooldown > 0f) return;
+        if (_atackCooldown > 0f) return;
         _player.Animator.SetTrigger("Attack");
     }
     internal void OnShoot()
