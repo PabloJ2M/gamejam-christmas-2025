@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FX
+    uniqueID: 3484710401
+    locked: 0
   - name: Forground
     uniqueID: 2102423749
     locked: 0

@@ -231,9 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501e727da2b946349a10459b5eac2fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabProyectil: {fileID: 8105287645743604909, guid: c4f7637904284614a98c1b78b03ed1ee, type: 3}
-  puntoDisparo: {fileID: 6389557200097505599}
-  tiempoEntreDisparos: 0.25
+  _prefabProyectil: {fileID: 8105287645743604909, guid: c4f7637904284614a98c1b78b03ed1ee, type: 3}
+  _puntoDisparo: {fileID: 6389557200097505599}
+  _tiempoEntreDisparos: 0.25
+  _knockbackForce: 25
 --- !u!114 &8230103872964042883
 MonoBehaviour:
   m_ObjectHideFlags: 0

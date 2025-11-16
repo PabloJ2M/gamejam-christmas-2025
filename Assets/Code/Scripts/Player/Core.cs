@@ -18,8 +18,8 @@ namespace Player.Controller
         public Vector2 GetDirection => new(transform.localScale.x, 0f);
         public void SetDirection(int value) => transform.localScale = new(value, 1f, 1f);
 
-        public void AddForceX(float force, ForceMode2D mode) => Body.AddForceX(force, mode);
-        public void AddForceY(float force, ForceMode2D mode) => Body.AddForceY(force, mode);
+        public void AddForceX(float force, ForceMode2D mode = ForceMode2D.Impulse) => Body.AddForceX(force, mode);
+        public void AddForceY(float force, ForceMode2D mode = ForceMode2D.Impulse) => Body.AddForceY(force, mode);
 
         public void VelocityDirection(Vector2 direcion) => Body.linearVelocity = direcion;
         public void VelocityY(float value) => Body.linearVelocityY = value;

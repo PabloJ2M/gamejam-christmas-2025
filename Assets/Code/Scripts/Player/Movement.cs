@@ -53,7 +53,7 @@ namespace Player.Controller
                 _player.SetDirection(_input);
         }
 
-        private void OnMove(InputValue value)
+        internal void OnMove(InputValue value)
         {
             if (_stun != null && _stun.IsStunned)
             {

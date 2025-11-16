@@ -4,32 +4,33 @@ using UnityEngine;
 public class SantaDisparo : MonoBehaviour
 {
     [Header("Disparo")]
-    
-    [SerializeField] private CarbonProyectil prefabProyectil;
-    [SerializeField] private Transform puntoDisparo;
-    [SerializeField] private float tiempoEntreDisparos = 0.25f;
+    [SerializeField] private CarbonProyectil _prefabProyectil;
+    [SerializeField] private Transform _puntoDisparo;
+    [SerializeField] private float _tiempoEntreDisparos = 0.25f;
+    [SerializeField] private float _knockbackForce = 1f;
 
-    private Core player;
-    private float cooldown;
+    private Core _player;
+    private float _cooldown;
 
-    private void Awake() => player = GetComponent<Core>();
-    private void Update() => cooldown -= Time.deltaTime;
+    private void Awake() => _player = GetComponent<Core>();
+    private void Update() => _cooldown -= Time.deltaTime;
 
-    private void OnAttack()
+    internal void OnAttack()
     {
-        if (cooldown > 0f) return;
-        player.Animator.SetTrigger("Shoot");
+        if (_cooldown > 0f) return;
+        _player.Animator.SetTrigger("Shoot");
     }
     public void Disparar()
     {
-        cooldown = tiempoEntreDisparos;
+        _cooldown = _tiempoEntreDisparos;
+        _player.AddForceX(-_player.GetDirection.x * _knockbackForce);
 
         CarbonProyectil nuevo = Instantiate(
-            prefabProyectil,
-            puntoDisparo.position,
+            _prefabProyectil,
+            _puntoDisparo.position,
             default
         );
 
-        nuevo.Inicializar(Random.Range(-0.1f, 0.1f) * Vector2.up + player.GetDirection);
+        nuevo.Inicializar(Random.Range(-0.1f, 0.1f) * Vector2.up + _player.GetDirection);
     }
 }
