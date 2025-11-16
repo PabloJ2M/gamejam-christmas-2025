@@ -18,9 +18,9 @@ public class SantaDisparo : MonoBehaviour
     private void OnAttack()
     {
         if (cooldown > 0f) return;
-        Disparar();
+        player.Animator.SetTrigger("Shoot");
     }
-    private void Disparar()
+    public void Disparar()
     {
         cooldown = tiempoEntreDisparos;
 
@@ -30,6 +30,6 @@ public class SantaDisparo : MonoBehaviour
             default
         );
 
-        nuevo.Inicializar(player.GetDirection);
+        nuevo.Inicializar(Random.Range(-0.1f, 0.1f) * Vector2.up + player.GetDirection);
     }
 }
