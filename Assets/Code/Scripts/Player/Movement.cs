@@ -11,9 +11,9 @@ namespace Player.Controller
         [SerializeField] private float _speed = 10;
         [SerializeField] private float _accelRate = 25;
 
-        [Header("Camera Offset")]
-        [SerializeField] private CinemachinePositionComposer _camera;
-        [SerializeField, Range(0, 10)] private float _offset = 2;
+        //[Header("Camera Offset")]
+        //[SerializeField] private CinemachinePositionComposer _camera;
+        //[SerializeField, Range(0, 10)] private float _offset = 2;
 
         private Core _player;
         PlayerStun _stun;
@@ -36,8 +36,8 @@ namespace Player.Controller
                 _player.Body.linearVelocity = vel;
                 _player.Animator.SetInteger("Speed", 0);
 
-                if (_camera != null)
-                    _camera.TargetOffset.x = 0f;
+                //if (_camera != null)
+                //    _camera.TargetOffset.x = 0f;
 
                 return;
             }
@@ -60,8 +60,8 @@ namespace Player.Controller
                 _input = 0;
                 _player.Animator.SetInteger("Speed", 0);
 
-                if (_camera != null)
-                    _camera.TargetOffset.x = 0f;
+                //if (_camera != null)
+                //    _camera.TargetOffset.x = 0f;
 
                 return;
             }
@@ -71,16 +71,16 @@ namespace Player.Controller
 
             _player.Animator.SetInteger("Speed", _input);
 
-            if (_camera != null)
-                _camera.TargetOffset.x = _input * _offset;
+            //if (_camera != null)
+            //    _camera.TargetOffset.x = _input * _offset;
         }
 
         private void RecuperarControl()
         {
             _input = 0; 
             _player.Animator.SetInteger("Speed", 0);
-            if (_camera != null)
-                _camera.TargetOffset.x = 0f;
+            //if (_camera != null)
+            //    _camera.TargetOffset.x = 0f;
         }
     }
 }

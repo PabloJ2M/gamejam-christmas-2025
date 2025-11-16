@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2647044951482357493}
   - component: {fileID: 6816808236793048341}
   - component: {fileID: 950615594676633533}
-  - component: {fileID: 2667659804395392818}
+  - component: {fileID: 2302402116498873516}
   m_Layer: 0
   m_Name: HealthCane
   m_TagString: Untagged
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3653333, y: 1.3653333}
+    oldSize: {x: 1.024, y: 1.024}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149,25 +149,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountToHeal: 1
---- !u!95 &2667659804395392818
-Animator:
-  serializedVersion: 7
+--- !u!111 &2302402116498873516
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3989814550523629071}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0ce62c8f298a2743b4f182dc45fd81a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 3f35581114a030246aa151a75952052a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3f35581114a030246aa151a75952052a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
