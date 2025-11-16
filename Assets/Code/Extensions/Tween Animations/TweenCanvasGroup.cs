@@ -15,8 +15,8 @@ namespace UnityEngine.Animations
 
         protected override void OnStart()
         {
-            _alpha = _canvasGroup.alpha = _tweenCore.IsEnabled ? 1f : 0f;
             PerformceInteraction(_tweenCore.IsEnabled);
+            OnUpdate(_tweenCore.IsEnabled ? 1f : 0f);
         }
         protected override void OnUpdate(float value)
         {
