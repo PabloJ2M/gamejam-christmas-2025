@@ -61,4 +61,7 @@ public class Health : MonoBehaviour, IDamageable
         invulnerable = true;
         tiempoInvulnerableRestante = duracionInvulnerabilidad;
     }
+
+    public int GetCurrentHealth() => vidaActual;
+    public int GetMaxHealth() => vidaMax;
 }
