@@ -1,5 +1,7 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] float intervaloMordedor = 1f;
     [SerializeField] float intervaloPetardos = 3f;
 
-    [System.Serializable]
+    [Serializable]
     struct Wave
     {
         public int mordedores;
@@ -109,4 +111,3 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 }
-
