@@ -17,18 +17,13 @@ namespace UnityEngine.Animations
             _from = _to = _transform.localPosition;
             _to += new Vector3(direction.x * size.x, direction.y * size.y, 0f);
         }
-        protected override void OnComplete() { }
+        protected override void OnComplete() => _tweenCore.onComplete?.Invoke();
 
         protected override void OnPerformePlay(bool value)
         {
             if (_tweenCore.IsEnabled == value) return;
 
-            //create tween animation
-            Tween tween = Tween.LocalPosition(_transform, value ? _from : _to, _tweenCore.Time,
-                _animationCurve,
-                _tweenCore.IsLoop ? -1 : 1, CycleMode.Yoyo,
-                _tweenCore.Delay, 0, _tweenCore.IgnoreTimeScale);
-
+            Tween tween = Tween.LocalPosition(_transform, _transform.localPosition, value ? _from : _to, _settings);
             tween.OnComplete(OnComplete);
         }
     }
