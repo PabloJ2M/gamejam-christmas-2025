@@ -1,6 +1,11 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField] private AudioSource _source;
+    [SerializeField] private AudioMixer _mixer;
+    [SerializeField] private AudioSource _effects;
+
+    public void SetVolume(string name, float value) =>
+        _mixer.SetFloat(name, Mathf.Log10(Mathf.Max(value, 0.0001f)) * 20f);
 }
