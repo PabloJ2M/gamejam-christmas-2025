@@ -14,7 +14,7 @@ public class Health : MonoBehaviour, IDamageable
     public bool IsDead => vidaActual <= 0;
     public bool IsInvulnerable => invulnerable;
 
-    private void Awake()
+    void Awake()
     {
         vidaActual = vidaMax;
     }
@@ -34,9 +34,10 @@ public class Health : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         if (IsDead) return;
-        if (invulnerable) return;   
+        if (invulnerable) return;
 
         vidaActual -= amount;
+        if (vidaActual < 0) vidaActual = 0;
 
         ActivarInvulnerabilidad();
 
@@ -44,6 +45,15 @@ public class Health : MonoBehaviour, IDamageable
         {
             Debug.Log("Moriste");
         }
+    }
+
+    public void Heal(int amount)
+    {
+        if (IsDead) return;
+
+        vidaActual += amount;
+        if (vidaActual > vidaMax) vidaActual = vidaMax;
+
     }
 
     private void ActivarInvulnerabilidad()
