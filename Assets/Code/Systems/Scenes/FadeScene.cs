@@ -5,14 +5,13 @@ namespace UnityEngine.SceneManagement
 {
     public class FadeScene : TweenCanvasGroup
     {
-        public string SceneName { private get; set; }
         public Action onCompleteFade;
 
         protected override void OnStart()
         {
-            bool isFading = !string.IsNullOrEmpty(SceneName);
-            OnUpdate(isFading ? 0f : 1f);
-            _tweenCore.Play(isFading);
+            _tweenCore.IsEnabled = onCompleteFade == null;
+            OnUpdate(_tweenCore.IsEnabled ? 1f : 0f);
+            _tweenCore.SwapTweenAnimation();
         }
         protected override void OnComplete()
         {

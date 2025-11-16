@@ -13,7 +13,7 @@ namespace UnityEngine.Animations
         protected override void OnComplete() => _alpha = _tweenCore.IsEnabled ? 1f : 0f;
         protected override void OnPerformePlay(bool value)
         {
-            if (_tweenCore.IsEnabled == value) return;
+            //if (_tweenCore.IsEnabled == value) return;
 
             Tween tween = Tween.Custom(_alpha, value ? 1f : 0f, _settings, OnUpdate);
             tween.OnComplete(OnComplete);
