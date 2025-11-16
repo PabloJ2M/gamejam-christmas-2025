@@ -6,6 +6,8 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] int vidaMax = 3;
     int vidaActual;
 
+    [SerializeField] DeathScreenUI deathUI;
+
     [Header("Invulnerabilidad")]
     [SerializeField] float duracionInvulnerabilidad = 0.7f;
     bool invulnerable;
@@ -43,7 +45,13 @@ public class Health : MonoBehaviour, IDamageable
 
         if (vidaActual <= 0)
         {
-            Debug.Log("Moriste");
+            if (deathUI == null)
+            {
+                deathUI = FindFirstObjectByType<DeathScreenUI>();
+            }
+
+            if (deathUI != null)
+                deathUI.MostrarPantallaMuerte();
         }
     }
 

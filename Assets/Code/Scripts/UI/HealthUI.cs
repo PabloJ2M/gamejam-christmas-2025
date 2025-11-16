@@ -18,7 +18,7 @@ public class HealthUI : MonoBehaviour
             currentFill = barraVida.fillAmount;
     }
 
-    void Update()
+    private void Update()
     {
         if (!health || !barraVida) return;
 
