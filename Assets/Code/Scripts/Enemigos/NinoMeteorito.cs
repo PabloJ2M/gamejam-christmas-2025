@@ -3,17 +3,19 @@ using System.Collections;
 
 public class NinoMeteorito : NinoBase
 {
-    [Header("Caida")]
-    [SerializeField] float fallSpeed = 18f;
+    [Header("Fall")]
+    [SerializeField] float fallSpeed = 7f;
     [SerializeField] float spawnOffsetY = 10f;
-    [SerializeField] float warningTime = 1.2f;
+    [SerializeField] float warningTime = 1.6f;
+    [SerializeField] float impactYOffset = -0.5f;
 
     [Header("Warning")]
     [SerializeField] WarningIndicator warningPrefab;
+    [SerializeField] float warningOffsetY = 2.5f;
 
-    [Header("Golpe por Overlap")]
+    [Header("Hit Santa")]
     [SerializeField] LayerMask capaSanta;
-    [SerializeField] float radioGolpe = 0.7f;
+    [SerializeField] float radioGolpe = 0.9f;
     [SerializeField] int dano = 1;
     [SerializeField] float duracionStun = 1f;
 
@@ -49,25 +51,34 @@ public class NinoMeteorito : NinoBase
         if (sprite) sprite.enabled = false;
         if (hitCollider) hitCollider.enabled = false;
 
+        StartCoroutine(WarningAndFall());
+    }
+
+    IEnumerator WarningAndFall()
+    {
         WarningIndicator warning = Instantiate(
             warningPrefab,
-            santa.position,
+            santa.position + Vector3.up * warningOffsetY,
             Quaternion.identity
         );
 
-        warning.target = santa;
-        warning.follow = true;
-        warning.offset = new Vector2(0f, +2f);
+        float t = 0f;
+        while (t < warningTime)
+        {
+            t += Time.deltaTime;
 
-        StartCoroutine(FallRoutine(warning));
-    }
+            if (santa)
+            {
+                Vector3 pos = santa.position;
+                pos.y += warningOffsetY;
+                warning.transform.position = pos;
+            }
 
-    IEnumerator FallRoutine(WarningIndicator warning)
-    {
-        yield return new WaitForSeconds(warningTime);
+            yield return null;
+        }
 
         float impactX = warning.transform.position.x;
-        float impactY = santa ? santa.position.y : warning.transform.position.y - 2f;
+        float impactY = santa ? santa.position.y + impactYOffset : warning.transform.position.y;
         impactPos = new Vector2(impactX, impactY);
 
         Destroy(warning.gameObject);
@@ -81,7 +92,7 @@ public class NinoMeteorito : NinoBase
         falling = true;
     }
 
-    private void Update()
+    void Update()
     {
         if (!falling || muerto) return;
 
@@ -91,30 +102,30 @@ public class NinoMeteorito : NinoBase
             fallSpeed * Time.deltaTime
         );
 
-        DetectarGolpeSanta();
-
         if (Vector2.Distance(transform.position, impactPos) < 0.05f)
         {
-            DetectarGolpeSanta();
+            TryGolpearSantaEnImpacto();
+
             StartCoroutine(BounceAndDie());
         }
     }
 
-    private void DetectarGolpeSanta()
+    void TryGolpearSantaEnImpacto()
     {
         if (yaGolpeoSanta) return;
 
-        Collider2D col = Physics2D.OverlapCircle(transform.position, radioGolpe, capaSanta);
-        if (!col) return;
-
-        Health health = col.GetComponent<Health>();
-        if (health != null && !health.IsDead && !health.IsInvulnerable)
+        Collider2D col = Physics2D.OverlapCircle(impactPos, radioGolpe, capaSanta);
+        if (col)
         {
-            health.TakeDamage(dano);
+            Health health = col.GetComponent<Health>();
+            if (health != null && !health.IsDead && !health.IsInvulnerable)
+            {
+                health.TakeDamage(dano);
 
-            PlayerStun stun = col.GetComponent<PlayerStun>();
-            if (stun != null)
-                stun.Stun(duracionStun);
+                PlayerStun stun = col.GetComponent<PlayerStun>();
+                if (stun != null)
+                    stun.Stun(duracionStun);
+            }
         }
 
         yaGolpeoSanta = true;
@@ -124,6 +135,7 @@ public class NinoMeteorito : NinoBase
     {
         falling = false;
         yaGolpeoSanta = true;
+        if (hitCollider) hitCollider.enabled = false;
 
         Vector2 start = transform.position;
         Vector2 end = start + Vector2.up * bounceHeight;
@@ -142,6 +154,7 @@ public class NinoMeteorito : NinoBase
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radioGolpe);
+        Vector3 pos = impactPos == Vector2.zero ? transform.position : (Vector3)impactPos;
+        Gizmos.DrawWireSphere(pos, radioGolpe);
     }
 }

@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -202,13 +202,17 @@ MonoBehaviour:
   rb: {fileID: 2515353564953669222}
   anim: {fileID: 0}
   muerto: 0
-  fallSpeed: 10
+  fallSpeed: 2
   spawnOffsetY: 5
   warningTime: 1
+  impactYOffset: -0.5
   warningPrefab: {fileID: 6038221690724571222, guid: 195a28124ec908643bd961efd732825d, type: 3}
+  warningOffsetY: 1.5
   capaSanta:
     serializedVersion: 2
     m_Bits: 8
   radioGolpe: 1
   dano: 1
   duracionStun: 1
+  bounceHeight: 12
+  bounceDuration: 0.35

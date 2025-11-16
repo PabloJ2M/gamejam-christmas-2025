@@ -13,6 +13,8 @@ public interface IDamageable
 
 public class NinoBase : MonoBehaviour, IDamageable, IRecibeGolpe
 {
+    public static int AliveCount { get; private set; }
+
     [Header("Datos base")]
     [SerializeField] int vida = 1;
     [SerializeField] float fuerzaGolpe = 10f;
@@ -29,8 +31,14 @@ public class NinoBase : MonoBehaviour, IDamageable, IRecibeGolpe
 
     protected virtual void Awake()
     {
+        AliveCount++;
         if (!rb) rb = GetComponent<Rigidbody2D>();
         if (!anim) anim = GetComponent<Animator>();
+    }
+
+    protected virtual void OnDestroy()
+    {
+        AliveCount = Mathf.Max(0, AliveCount - 1);
     }
 
     public virtual void TakeDamage(int amount)

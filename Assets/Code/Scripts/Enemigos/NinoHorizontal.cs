@@ -6,7 +6,6 @@ public class NinoHorizontal : NinoBase
     [Header("Movimiento Horizontal")]
     [SerializeField] float speed = 15f;
     [SerializeField] float warningTime = 1.2f;
-    public bool spawnFromLeft = true;
 
     [Header("Warning")]
     [SerializeField] WarningIndicator warningPrefab;
@@ -17,15 +16,20 @@ public class NinoHorizontal : NinoBase
     [SerializeField] int dano = 1;
     [SerializeField] float duracionStun = 1f;
 
+    [Header("Offscreen")]
+    [SerializeField] float offscreenMargin = 0.2f;
+
     Transform santa;
-    Vector2 targetPos;
     bool launched;
     bool yaGolpeoSanta;
+    Vector2 moveDir;
+    Camera mainCam;
 
     protected override void Awake()
     {
         base.Awake();
         santa = GameObject.FindGameObjectWithTag("Player")?.transform;
+        mainCam = Camera.main;
     }
 
     void Start()
@@ -35,7 +39,12 @@ public class NinoHorizontal : NinoBase
         WarningIndicator warning = Instantiate(warningPrefab, santa.position, Quaternion.identity);
         warning.target = santa;
         warning.follow = true;
-        warning.offset = spawnFromLeft ? new Vector2(-1.5f, 0f) : new Vector2(+1.5f, 0f);
+
+        bool fromLeft = transform.position.x < santa.position.x;
+
+        warning.offset = fromLeft ? new Vector2(-1.5f, 0f) : new Vector2(+1.5f, 0f);
+
+        moveDir = fromLeft ? Vector2.right : Vector2.left;
 
         StartCoroutine(LaunchRoutine(warning));
     }
@@ -44,29 +53,31 @@ public class NinoHorizontal : NinoBase
     {
         yield return new WaitForSeconds(warningTime);
 
-        targetPos = warning.transform.position;
-        Destroy(warning.gameObject);
+        if (warning)
+            Destroy(warning.gameObject);
 
         launched = true;
     }
 
-    private void Update()
+    void Update()
     {
         if (!launched || muerto) return;
 
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            targetPos,
-            speed * Time.deltaTime
-        );
+        transform.position += (Vector3)(moveDir * speed * Time.deltaTime);
 
         DetectarGolpeSanta();
 
-        if (Vector2.Distance(transform.position, targetPos) < 0.1f)
-            Destroy(gameObject);
+        if (mainCam != null)
+        {
+            Vector3 vp = mainCam.WorldToViewportPoint(transform.position);
+            if (vp.x < -offscreenMargin || vp.x > 1f + offscreenMargin)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-    private void DetectarGolpeSanta()
+    void DetectarGolpeSanta()
     {
         if (yaGolpeoSanta) return;
 
@@ -79,7 +90,8 @@ public class NinoHorizontal : NinoBase
             health.TakeDamage(dano);
 
             PlayerStun stun = col.GetComponent<PlayerStun>();
-            if (stun != null) stun.Stun(duracionStun);
+            if (stun != null)
+                stun.Stun(duracionStun);
         }
 
         yaGolpeoSanta = true;
