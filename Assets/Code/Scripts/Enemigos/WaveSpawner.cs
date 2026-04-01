@@ -20,7 +20,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] float intervaloPetardos = 3f;
 
     [SerializeField] private UnityEvent _bossFightCallback;
-    public bool CompleteBoss { private get; set; }
+    public bool CompleteBoss { private get; set; } = false;
 
     [Serializable]
     struct Wave
@@ -70,7 +70,8 @@ public class WaveSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            if (i + 1 % 3 == 0)
+            int nextRound = i + 1;
+            if (nextRound % 2 == 0)
             {
                 _bossFightCallback.Invoke();
                 yield return new WaitUntil(() => CompleteBoss);

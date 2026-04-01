@@ -17,8 +17,9 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     {
         //create singleton
         if (Instance) { Destroy(gameObject); return; }
-        
+
         Instance = this as T;
+        transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }
 }

@@ -116,7 +116,7 @@ MonoBehaviour:
     cycleMode: 0
     startDelay: 0
     endDelay: 0
-    useUnscaledTime: 0
+    useUnscaledTime: 1
     _useFixedUpdate: 0
     _updateType: 0
   _startDisable: 0
